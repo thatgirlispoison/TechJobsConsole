@@ -57,6 +57,25 @@ namespace TechJobsConsole
 
             return jobs;
         }
+        //create a new public static method that will search for a string within each of the columns without duplicates
+        public static List<Dictionary<string, string>> FindByValue(string searchWord)
+        {
+            LoadData();
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+            foreach (Dictionary<string, string> row in AllJobs)
+                foreach (KeyValuePair<string, string> keyValuePair in row)
+                {
+                    string word = keyValuePair.Value.ToLower();
+
+                    if (word.Contains(searchWord))
+                    {
+                        jobs.Add(row);
+                        break;
+                    }
+                }
+            return jobs;
+
+        }
 
         /*
          * Load and parse data from job_data.csv
